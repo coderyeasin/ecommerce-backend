@@ -1,6 +1,7 @@
 import express, { Application } from 'express'
 import cors from 'cors'
-import { ERouter } from './modules/products/prodduct.route'
+import { EProductRouter} from './modules/products/product.route'
+import { EOrderRouter } from './modules/orders/order.route'
 
 const app: Application = express()
 
@@ -9,6 +10,7 @@ app.use(express.json())
 app.use(cors())
 
 
-app.use('/api/products', ERouter)
+app.use('/api/products', EProductRouter)
+app.use('/api/orders', EOrderRouter)
 
 export default app

@@ -11,4 +11,4 @@ router.get('/:searchTerm', EController.searchByProductName)
 // router.put('/:productId', EController.updateSingleProducts)
 router.delete('/:productId', EController.deleteSingleProducts)
 
-export const ERouter = router;
+export const EProductRouter = router;
