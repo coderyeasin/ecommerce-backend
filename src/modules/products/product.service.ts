@@ -11,12 +11,6 @@ const getAllProductsFromDB = async () => {
     const result = await ProductModel.find();
     return result;
 }
-const getAllSearchProductsFromDB = async (searchTerm:string) => {
-      const result = await ProductModel.find({
-            name: { $regex: searchTerm, $options: 'i' },
-        });
-    return result;
-}
 
 const getSingleProductsFromDB = async (id:string) => {
     const result = await ProductModel.findOne({_id: id});
@@ -28,6 +22,12 @@ const updateSingleProductsFromDB = async (id:string) => {
     return result;
 }
 
+const getAllSearchProductsFromDB = async (searchTerm:string) => {
+      const result = await ProductModel.find({
+            name: { $regex: searchTerm, $options: 'i' },
+        });
+    return result;
+}
 
 const deleteSingleProductsFromDB = async (id:string) => {
     const result = await ProductModel.deleteOne({_id: id});

@@ -21,13 +21,23 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProducts = async (req: Request, res: Response) => {
     try {
-        const result = await EServices.getAllProductsFromDB();
-
-        res.status(200).json({
-            success: true,
-            message: 'Products fetched successfully',
-            data: result
-        })
+        const searchTerm = req.query.searchTerm;
+        if (searchTerm) {
+             const result = await EServices.getAllSearchProductsFromDB(searchTerm as string);
+            res.status(200).json({
+                success: true,
+                message: `Products matching search term ${searchTerm} fetched successfully!`,
+                data: result
+            })
+            } else {
+            const result = await EServices.getAllProductsFromDB();
+            res.status(200).json({
+                success: true,
+                message: 'Products fetched successfully',
+                data: result
+            })
+        }
+        
     } catch (error) {
         console.log(error)
     }
@@ -63,20 +73,6 @@ const updateSingleProducts = async (req: Request, res: Response) => {
     }
 }
 
-const searchByProductName = async(req: Request, res: Response) => {
-    try {
-         const { searchTerm } = req.body;
-          const result = await EServices.getAllSearchProductsFromDB(searchTerm as string);
-            res.status(200).json({
-            success: true,
-            message:  `Products matching search term ${searchTerm} fetched successfully!`,
-            data: result
-        })
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 const deleteSingleProducts = async (req: Request, res: Response) => {
     try {
         const { productId } = req.params;
@@ -99,5 +95,5 @@ export const EController = {
     getSingleProducts,
     updateSingleProducts,
     deleteSingleProducts,
-    searchByProductName
+    // searchByProductName
 }
