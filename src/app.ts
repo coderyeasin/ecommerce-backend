@@ -1,14 +1,14 @@
-import express, { Application, Request, Response } from "express";
-import cors from "cors";
+import express, { Application } from 'express'
+import cors from 'cors'
+import { ERouter } from './modules/products/prodduct.route'
 
-const app: Application = express();
+const app: Application = express()
 
 // parser
-app.use(express.json());
-app.use(cors());
+app.use(express.json())
+app.use(cors())
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
-});
 
-export default app;
+app.use('/api/products', ERouter)
+
+export default app
