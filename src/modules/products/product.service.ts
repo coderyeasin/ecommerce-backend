@@ -1,6 +1,5 @@
 import { Product } from "./product.interface";
 import { ProductModel } from "./product.model";
-
 // Products
 const createProductsIntoDB = async (product: Product) => {
     const result = await ProductModel.create(product);
@@ -17,8 +16,21 @@ const getSingleProductsFromDB = async (id:string) => {
     return result;
 }
 
-const updateSingleProductsFromDB = async (id:string) => {
-    const result = await ProductModel.updateOne({_id: id});
+const updateSingleProductsFromDB = async (id:string, updateData:Product) => {
+            const filterId = { _id: id }
+            const options = { new: true }
+            const updateDoc = {
+                $set: {
+                    name: updateData.name,
+                    description: updateData.description,
+                    price: updateData.price,
+                    category: updateData.category,
+                    tags: updateData.tags,
+                    variants: updateData.variants,
+                    inventory:updateData.inventory
+                }
+            }
+    const result = await ProductModel.findOneAndUpdate(filterId, updateDoc, options);
     return result;
 }
 
