@@ -24,7 +24,13 @@ const getAllOrder = async (req: Request, res: Response) => {
       const result = await EOrdersServices.getOrderByEmailFromDB(
         email as string,
       );
-      res.status(200).json({
+          if (!result.length) {
+        return res.status(404).json({
+          success: false,
+          message: "Order not found",
+        });
+      }
+    return  res.status(200).json({
         success: true,
         message: "Orders fetched successfully for user email!",
         data: result,
@@ -38,10 +44,7 @@ const getAllOrder = async (req: Request, res: Response) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: "Order not found",
-    });
+    console.log(error)
   }
 };
 
