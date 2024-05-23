@@ -4,13 +4,13 @@ First, clone this [Repository](https://github.com/coderyeasin/batch-3-assignment
 
 Tech stack: **TypeScript**, **Mongoose**, **Zod**, **Express**, **Es-Lint**,**Prettier**
 
-`**Please follow API endpoint to get proper results**`
+### **Please follow API endpoints to get proper results**
 
 **For Products** 
 ```
 /api/products
 ```
-**Search Products** 
+**Search By Products Name** 
 ```
 /api/products?searchTerm=iphone || /api/products?searchTerm=?searchTerm=Makers Coffee [for more results]
 ```
@@ -31,7 +31,7 @@ Tech stack: **TypeScript**, **Mongoose**, **Zod**, **Express**, **Es-Lint**,**Pr
 ```
 /api/orders
 ```
-**Search Orders** 
+**Search By Orders Email** 
 ```
 /api/orders?email=level2@programming-hero.com
 ```
