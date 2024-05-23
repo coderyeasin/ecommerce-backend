@@ -7,34 +7,34 @@ Tech stack: **TypeScript**, **Mongoose**, **Zod**, **Express**, **Es-Lint**,**Pr
 `**Please follow API endpoint to get proper results**`
 
 **For Products** 
-`
+```
 /api/products
-`
+```
 **Search Products** 
-`
+```
 /api/products?searchTerm=iphone || /api/products?searchTerm=?searchTerm=Makers Coffee [for more results]
-`
+```
 **Single Product** 
-`
+```
 /api/products/:productId
-`
+```
 **Update a Product** 
-`
+```
 /api/products/:productId
-`
+```
 **Delete a Product** 
-`
+```
 /api/products/:productId
-`
+```
 
 **For Orders** 
-`
+```
 /api/orders
-`
+```
 **Search Orders** 
-`
+```
 /api/orders?email=level2@programming-hero.com
-`
+```
 
 `Folder structure`
 
