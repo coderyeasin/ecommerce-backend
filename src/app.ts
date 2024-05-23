@@ -15,7 +15,15 @@ app.use("/api/orders", EOrderRouter);
 // just a welcome msg to show
 app.get('/', (req: Request, res: Response) => {
     res.status(200).json({
-        message:'E-Commerce API Service'
+        message: 'E-Commerce API Service'
+    })
+});
+
+// Error handle for unused route
+app.all('*', (req: Request, res: Response) => {
+      res.status(200).json({
+        success: false,
+        message: "Route not found"
     })
 })
 
