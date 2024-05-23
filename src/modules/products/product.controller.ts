@@ -10,7 +10,7 @@ const createProduct = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: "Product created successfully",
+      message: "Product created successfully!",
       data: result,
     });
   } catch (error) {
@@ -27,14 +27,14 @@ const getAllProducts = async (req: Request, res: Response) => {
       );
       res.status(200).json({
         success: true,
-        message: `Products matching search term ${searchTerm} fetched successfully!`,
+        message: `Products matching search term '${searchTerm}' fetched successfully!`,
         data: result,
       });
     } else {
       const result = await EServices.getAllProductsFromDB();
       res.status(200).json({
         success: true,
-        message: "Products fetched successfully",
+        message: "Products fetched successfully!",
         data: result,
       });
     }
@@ -50,7 +50,7 @@ const getSingleProducts = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: "Products fetched successfully",
+      message: "Product fetched successfully!",
       data: result,
     });
   } catch (error) {
