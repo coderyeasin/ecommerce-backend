@@ -1,4 +1,4 @@
-## Please Follow this command to run this project
+## Please Follow this commands to run this project
 
 First, clone this [Repository](https://github.com/coderyeasin/batch-3-assignment-2-coderyeasin.git) and then open this project in `VS Code` then install existing packages with `npm i` using the command line.
 
@@ -68,7 +68,7 @@ npm run lint:fix
 
 ## Deployed
 
-Check it out : [E-Commerce Server](https://#.com).
+Check it out : [E-Commerce Server](https://batch-3-assignment-2-coderyeasin.vercel.app/).
 
 ## **Happy Journey!**
 
