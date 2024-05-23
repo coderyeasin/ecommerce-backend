@@ -14,9 +14,16 @@ app.use((0, cors_1.default)());
 app.use("/api/products", product_route_1.EProductRouter);
 app.use("/api/orders", order_route_1.EOrderRouter);
 // just a welcome msg to show
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
     res.status(200).json({
-        message: 'E-Commerce API Service'
+        message: "E-Commerce API Service",
+    });
+});
+// Error handle for unused route
+app.all("*", (req, res) => {
+    res.status(200).json({
+        success: false,
+        message: "Route not found",
     });
 });
 exports.default = app;
