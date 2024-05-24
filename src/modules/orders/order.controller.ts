@@ -1,12 +1,36 @@
 import { Request, Response } from "express";
 import { EOrdersServices } from "./order.service";
 import ordersSchema from "./order.validation";
+import { ProductModel } from "../products/product.model";
 
 const createOrder = async (req: Request, res: Response) => {
   try {
     const { orders: orderData } = req.body;
-    const validation = await ordersSchema.parse(orderData);
-    const result = await EOrdersServices.createOrderIntoDB(validation);
+
+    const productsData = await ProductModel.findById(orderData.productId);
+    if (!productsData) {
+       res.status(404).json({
+        success: false,
+        message: "Product ID is not matched",
+       })
+      return;
+    }
+    if (
+      orderData.quantity > productsData.inventory.quantity ||
+      !productsData.inventory.inStock
+    ) {
+      res.status(400).json({
+        success: false,
+        message: "Insufficient quantity available in inventory",
+      });
+      return;
+    }
+    productsData.inventory.quantity -= orderData.quantity;
+    productsData.inventory.inStock = productsData.inventory.quantity > 0;
+    await productsData.save();
+
+    const orderValidationData = await ordersSchema.parse(orderData);
+    const result = await EOrdersServices.createOrderIntoDB(orderValidationData);
     res.status(200).json({
       success: true,
       message: "Order created successfully!",

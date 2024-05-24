@@ -22,7 +22,7 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const result = yield product_service_1.EServices.createProductsIntoDB(validationData);
         res.status(200).json({
             success: true,
-            message: "Product created successfully",
+            message: "Product created successfully!",
             data: result,
         });
     }
@@ -37,7 +37,7 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
             const result = yield product_service_1.EServices.getAllSearchProductsFromDB(searchTerm);
             res.status(200).json({
                 success: true,
-                message: `Products matching search term ${searchTerm} fetched successfully!`,
+                message: `Products matching search term '${searchTerm}' fetched successfully!`,
                 data: result,
             });
         }
@@ -45,7 +45,7 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
             const result = yield product_service_1.EServices.getAllProductsFromDB();
             res.status(200).json({
                 success: true,
-                message: "Products fetched successfully",
+                message: "Products fetched successfully!",
                 data: result,
             });
         }
@@ -60,7 +60,7 @@ const getSingleProducts = (req, res) => __awaiter(void 0, void 0, void 0, functi
         const result = yield product_service_1.EServices.getSingleProductsFromDB(productId);
         res.status(200).json({
             success: true,
-            message: "Products fetched successfully",
+            message: "Product fetched successfully!",
             data: result,
         });
     }
