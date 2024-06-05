@@ -17,8 +17,7 @@ const product_service_1 = require("./product.service");
 const product_validation_1 = __importDefault(require("./product.validation"));
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { product: productData } = req.body;
-        const validationData = yield product_validation_1.default.parse(productData);
+        const validationData = yield product_validation_1.default.parse(req.body);
         const result = yield product_service_1.EServices.createProductsIntoDB(validationData);
         res.status(200).json({
             success: true,
@@ -71,7 +70,7 @@ const getSingleProducts = (req, res) => __awaiter(void 0, void 0, void 0, functi
 const updateSingleProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { productId } = req.params;
-        const updateData = req.body.products;
+        const updateData = req.body;
         const validationData = yield product_validation_1.default.parse(updateData);
         const result = yield product_service_1.EServices.updateSingleProductsFromDB(productId, validationData);
         return res.status(200).json({

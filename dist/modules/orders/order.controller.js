@@ -15,11 +15,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EOrderController = void 0;
 const order_service_1 = require("./order.service");
 const order_validation_1 = __importDefault(require("./order.validation"));
+const product_model_1 = require("../products/product.model");
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { orders: orderData } = req.body;
-        const validation = yield order_validation_1.default.parse(orderData);
-        const result = yield order_service_1.EOrdersServices.createOrderIntoDB(validation);
+        const orderData = req.body;
+        const productsData = yield product_model_1.ProductModel.findById(orderData.productId);
+        if (!productsData) {
+            res.status(404).json({
+                success: false,
+                message: "Product ID is not matched",
+            });
+            return;
+        }
+        if (orderData.quantity > productsData.inventory.quantity ||
+            !productsData.inventory.inStock) {
+            res.status(400).json({
+                success: false,
+                message: "Insufficient quantity available in inventory",
+            });
+            return;
+        }
+        productsData.inventory.quantity -= orderData.quantity;
+        productsData.inventory.inStock = productsData.inventory.quantity > 0;
+        yield productsData.save();
+        const orderValidationData = yield order_validation_1.default.parse(orderData);
+        const result = yield order_service_1.EOrdersServices.createOrderIntoDB(orderValidationData);
         res.status(200).json({
             success: true,
             message: "Order created successfully!",
