@@ -5,8 +5,7 @@ import { ProductModel } from "../products/product.model";
 
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const { orders: orderData } = req.body;
-
+    const orderData = req.body;
     const productsData = await ProductModel.findById(orderData.productId);
     if (!productsData) {
        res.status(404).json({
